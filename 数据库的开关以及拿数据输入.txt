@@ -1,0 +1,26 @@
+SQLiteConnection myconn = null;
+            DataGridView dv = new DataGridView();
+      
+            SQLiteCommand mycom = null;
+            SQLiteDataAdapter myrec = null;
+            myconn = new SQLiteConnection(@"Data Source=" + @"C:\Users\yangxunkai\Desktop\做这个\destone.db;Initial Catalog=sqlite;Integrated Security=True;Max Pool Size=10");
+            myconn.Open();
+            mycom = myconn.CreateCommand();
+            mycom.CommandText = "SELECT * FROM WeighingRecord";
+            SQLiteDataAdapter adap = new SQLiteDataAdapter(mycom);
+            DataSet ds = new DataSet();
+            adap.Fill(ds);
+            dgv.AutoGenerateColumns = false;//取消自动加一列
+            dgv.AllowUserToAddRows = false;//取消自动加一行
+            dgv.DataSource = ds.Tables[0].DefaultView;
+          
+
+            //关闭连接操作
+
+
+            string sql = string.Format("SELECT * FROM WeighingRecord");
+            mycom.CommandText = sql;
+            mycom.CommandType = CommandType.Text;
+            SQLiteDataReader sdr = mycom.ExecuteReader();
+            
+            myconn.Close();

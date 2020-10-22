@@ -1,0 +1,12 @@
+1、开头加代码“using System.IO;”
+
+2、在按钮函数里写
+	using (FileStream fsWrite = new FileStream(@"C:\Users\yangxunkai\Desktop\new.txt", FileMode.OpenOrCreate, FileAccess.Write))
+	/* 声明一个目录文件+文件的路径  ileMode.OpenOrCreate：将文本中的内容逐字替换    FileAccess.Write：定义文件的读取、写入或读/写访问权限的常量*/
+            string s = uiTextBox1.Text.Trim();     //声明一个数组保存文本框的内容
+            byte[] buffer = System.Text.Encoding.Default.GetBytes(s); //将字符串转为字节数组
+                fsWrite.Write(buffer, 0, buffer.Length);//将字节数组全部写到之前所证明的路径目录文件中
+            }
+            MessageBox.Show("保存成功");
+
+注意：记得在using后加{}符号

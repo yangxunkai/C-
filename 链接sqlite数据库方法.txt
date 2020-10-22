@@ -1,0 +1,51 @@
+第一步、
+
+最上面引用 using System.Data.SQLite;
+
+第二步、
+往外面拿数据
+
+           List<stuClass1> list = new List<stuClass1>();//将数据存放到这个
+            string constr = @"Data Source=" + @"C:\Users\yangxunkai\Desktop\做这个\destone.db;Initial Catalog=sqlite;Integrated Security=True;Max Pool Size=10";
+
+	//链接数据库，加表
+            using (SQLiteConnection con = new SQLiteConnection(constr))
+            {
+                string sql = "select * from Meter";
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, con))
+                {
+                    con.Open();
+                    //通过调用ExecuteReader来给数据库语句进行执行在数据库端
+                    //返回一个可以获得数据的对象 reader 需要通过reader 来获取数据并把数据显示出来
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        //接下来通过reader对象来一条一条获取数据
+                        //1.在获取数据前，先判断一下本次执行查询后，是否查询到数据
+                        if (reader.HasRows)//如果有数据，就为true,否则为false
+                        {
+                            //如果有数据，那么接下来就是一条条来取出来
+                            //每次获取数据之前都要调用reader.Read() 向后移动一条数据 没有遇到数据跳出循环（false）
+                            while (reader.Read())//向后移动一条数据
+                            {
+                                //GetValue 只能通过列索引来获取列的值
+                                //Console.Write(reader["sex"]);
+                                //reader.FieldCount查询出来的列数
+                                stuClass1 moder = new stuClass1();
+                                moder.calssid = reader.GetInt32(1);
+                                moder.className = reader.GetString(0);
+                              
+                                list.Add(moder);//把moder放到list中
+
+                                Console.WriteLine();
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("没有查询到任何数据");
+                        }
+
+
+3、在最后输出数据在前段上
+ this.uiDataGridView1.DataSource = list;

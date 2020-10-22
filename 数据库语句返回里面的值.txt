@@ -1,0 +1,1 @@
+insert into 表名 output i     nserted.tClassId【tclassid为你需要返回的名字】     values('插入的值'，'插入的值')

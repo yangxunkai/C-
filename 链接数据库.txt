@@ -1,0 +1,18 @@
+ //1.连接字符串
+            string constr = "Data Source=DESKTOP-1USOP0L;Initial Catalog=ttt;Integrated Security=True";
+            //2.创建连接对象
+            using (SqlConnection con =new SqlConnection(constr))
+            {
+                //3.sql语句
+                string sql = "insert into name values('2222','123','男','123','1998.10.23','54646xasxsa','123','1949.3.23')";
+                //4.创建SqlCommand
+                using (SqlCommand cmd =new SqlCommand(sql, con))
+                {
+                    //5.打开连接
+                    con.Open();
+                    //6.执行
+                    int r=cmd.ExecuteNonQuery();
+                    Console.WriteLine("成功插入了{0}行", r);
+                }
+            }
+            Console.ReadKey();

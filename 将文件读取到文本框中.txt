@@ -1,0 +1,8 @@
+//在文本框中展示你拿出的字符串
+            using (FileStream fsRead = new FileStream(path, FileMode.OpenOrCreate,FileAccess.Read))
+            {
+
+                byte[] buffer =new byte[1024 * 1024 * 5];
+                int r = fsRead.Read(buffer, 0, buffer.Length);
+                textBox1.Text= Encoding.Default.GetString(buffer, 0, r);
+            }

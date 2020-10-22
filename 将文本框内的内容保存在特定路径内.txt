@@ -1,0 +1,7 @@
+ using (FileStream fsWrite = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+            /* 声明一个目录文件+文件的路径  ileMode.OpenOrCreate：将文本中的内容逐字替换    FileAccess.Write：定义文件的读取、写入或读/写访问权限的常量*/
+            {
+               byte[] buffer =Encoding.Default.GetBytes(textBox1.Text); //将字符串转为字节数组
+            fsWrite.Write(buffer, 0, buffer.Length);//将字节数组全部写到之前所证明的路径目录文件中
+            }
+            MessageBox.Show("保存成功");
